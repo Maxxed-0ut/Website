@@ -1,6 +1,7 @@
 import {
   createUserWithEmailAndPassword,
   onAuthStateChanged,
+  sendPasswordResetEmail,
   signInWithEmailAndPassword,
   signOut,
   updateProfile
@@ -159,7 +160,10 @@ questList.addEventListener("change", async event => {
       return;
     }
   } else {
+    checkbox.checked = !checkbox.checked;
+    updateQuests();
     showToast(firebaseConfigured ? "Sign in to sync quest progress." : "Configure Firebase to save quest progress.");
+    if (firebaseConfigured) openAuthDialog();
     return;
   }
   if (checkbox.checked) {
@@ -219,11 +223,29 @@ function updateAccountUI(user) {
   document.getElementById("topProfileButton").textContent = initials;
   authActions.hidden = Boolean(user);
   signOutButton.hidden = !user;
+  document.getElementById("resetPasswordButton").hidden = Boolean(user) || createAccountMode;
+  document.getElementById("signInButton").textContent = createAccountMode ? "Create account" : "Sign in";
+  document.getElementById("createAccountButton").textContent = createAccountMode ? "Back to sign in" : "Create account";
   emailInput.disabled = Boolean(user);
   passwordInput.disabled = Boolean(user);
   displayNameField.hidden = Boolean(user) || !createAccountMode;
   displayNameInput.required = !user && createAccountMode;
   document.getElementById("authTitle").textContent = user ? "Your Guild account" : "Welcome to Guild.";
+}
+
+function authErrorMessage(error) {
+  const messages = {
+    "auth/email-already-in-use": "That email already has an account. Try signing in instead.",
+    "auth/invalid-credential": "Email or password is incorrect.",
+    "auth/invalid-email": "Enter a valid email address.",
+    "auth/network-request-failed": "Network error. Check your connection and try again.",
+    "auth/operation-not-allowed": "Email/password sign-in is disabled in Firebase Authentication settings.",
+    "auth/too-many-requests": "Too many attempts. Wait a little and try again.",
+    "auth/user-disabled": "This account has been disabled. Contact the project administrator.",
+    "auth/user-not-found": "No account exists for that email. Create an account first.",
+    "auth/weak-password": "Choose a password with at least 6 characters."
+  };
+  return messages[error.code] || "Authentication failed. Check your details and Firebase settings, then try again.";
 }
 
 function openAuthDialog() {
@@ -237,21 +259,15 @@ document.getElementById("profileButton").addEventListener("click", openAuthDialo
 document.getElementById("topProfileButton").addEventListener("click", openAuthDialog);
 document.getElementById("closeAuthDialog").addEventListener("click", () => authDialog.close());
 
-document.getElementById("createAccountButton").addEventListener("click", async () => {
+document.getElementById("createAccountButton").addEventListener("click", () => {
   if (!firebaseConfigured) {
     authError.textContent = "Add your Firebase environment variables before creating an account.";
     return;
   }
-  createAccountMode = true;
+  createAccountMode = !createAccountMode;
   updateAccountUI(null);
   authError.textContent = "";
-  if (!authForm.reportValidity()) return;
-  try {
-    const credential = await createUserWithEmailAndPassword(auth, emailInput.value.trim(), passwordInput.value);
-    await updateProfile(credential.user, { displayName: displayNameInput.value.trim() });
-  } catch (error) {
-    authError.textContent = error.message;
-  }
+  if (createAccountMode) displayNameInput.focus();
 });
 
 authForm.addEventListener("submit", async event => {
@@ -260,11 +276,35 @@ authForm.addEventListener("submit", async event => {
     authError.textContent = "Add your Firebase environment variables before signing in.";
     return;
   }
-  createAccountMode = false;
   try {
-    await signInWithEmailAndPassword(auth, emailInput.value.trim(), passwordInput.value);
+    if (createAccountMode) {
+      const credential = await createUserWithEmailAndPassword(auth, emailInput.value.trim(), passwordInput.value);
+      await updateProfile(credential.user, { displayName: displayNameInput.value.trim() });
+      updateAccountUI(credential.user);
+      authDialog.close();
+      showToast("Your account is ready.");
+    } else {
+      await signInWithEmailAndPassword(auth, emailInput.value.trim(), passwordInput.value);
+    }
   } catch (error) {
-    authError.textContent = error.message;
+    console.error(createAccountMode ? "Account creation failed" : "Sign-in failed", error);
+    authError.textContent = authErrorMessage(error);
+  }
+});
+
+document.getElementById("resetPasswordButton").addEventListener("click", async () => {
+  if (!emailInput.value.trim()) {
+    authError.textContent = "Enter your email address first, then choose “Forgot your password?” again.";
+    emailInput.focus();
+    return;
+  }
+  try {
+    await sendPasswordResetEmail(auth, emailInput.value.trim());
+    authError.textContent = "";
+    showToast("If an account exists for that email, a reset link is on its way.");
+  } catch (error) {
+    console.error("Password reset request failed", error);
+    authError.textContent = authErrorMessage(error);
   }
 });
 
@@ -274,7 +314,8 @@ signOutButton.addEventListener("click", async () => {
     authDialog.close();
     showToast("You have been signed out.");
   } catch (error) {
-    authError.textContent = error.message;
+    console.error("Sign-out failed", error);
+    authError.textContent = "Could not sign out. Please try again.";
   }
 });
 

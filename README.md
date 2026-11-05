@@ -36,5 +36,6 @@ Add the same required `VITE_FIREBASE_*` settings under **Project Settings → En
 - Responsive student-builder dashboard and skill-tree interaction.
 - Filterable sample opportunities.
 - Firebase email/password account creation and sign-in.
+- Password reset email flow.
 - Firestore-backed user profile, daily quest completion, and saved opportunities.
 - User-scoped Firestore security rules.

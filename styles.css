@@ -250,6 +250,8 @@ h2 { margin-top: 5px; font: 600 19px/1.15 var(--display); letter-spacing: -.7px;
 .auth-actions { display: grid; grid-template-columns: 1fr 1fr; gap: 9px; }
 .button-light { border: 1px solid #e4e9e1; color: #506050; background: #f8faf6; }
 .button-light:hover { background: #eef3eb; }
+.auth-link { justify-self: start; padding: 2px 0; border: 0; color: #6f8b61; background: transparent; font-size: 10px; font-weight: 600; }
+.auth-link:hover { color: #3a6545; text-decoration: underline; }
 .sign-out-button { justify-self: start; }
 
 @media (min-width: 1450px) {
