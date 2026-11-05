@@ -1,0 +1,204 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#f6f7f4">
+    <meta name="description" content="A home base for student builders. Find your people, ship real projects, and make your progress count.">
+    <title>Guild — Build something real</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <div class="app-shell">
+      <aside class="sidebar" id="sidebar">
+        <a class="brand" href="#" aria-label="Guild home">
+          <span class="brand-mark" aria-hidden="true"><span></span><span></span><span></span><span></span></span>
+          <span>guild<span class="brand-period">.</span></span>
+        </a>
+        <div class="workspace-label">YOUR SPACE</div>
+        <nav class="main-nav" aria-label="Main navigation">
+          <button class="nav-link active" data-view="Overview"><span class="nav-icon">⌂</span>Overview</button>
+          <button class="nav-link" data-view="Discover"><span class="nav-icon">⌕</span>Discover<span class="nav-count">4</span></button>
+          <button class="nav-link" data-view="My projects"><span class="nav-icon">▧</span>My projects</button>
+          <button class="nav-link" data-view="Guild"><span class="nav-icon">♧</span>Your guild</button>
+        </nav>
+        <div class="sidebar-rule"></div>
+        <div class="workspace-label">YOUR GUILD <button class="tiny-add" aria-label="Add guild">+</button></div>
+        <button class="guild-card" data-view="Berkeley Builders">
+          <span class="guild-crest">B</span><span><strong>Berkeley Builders</strong><small>128 members · active</small></span><span class="guild-online"></span>
+        </button>
+        <div class="sidebar-bottom">
+          <div class="sidebar-tip">
+            <span class="tip-spark">✳</span>
+            <strong>Good things take<br>shipping.</strong>
+            <span>One small step today beats a perfect plan tomorrow.</span>
+            <div class="tip-dots"><i></i><i></i><i></i></div>
+          </div>
+          <button class="user-menu" id="profileButton" aria-label="Sign in or manage account">
+            <span class="avatar avatar-user" id="userInitials">GB</span><span class="user-details"><strong id="userName">Guest builder</strong><small id="userStatus">Sign in to sync progress</small></span><span class="menu-dots">···</span>
+          </button>
+        </div>
+      </aside>
+
+      <main class="main-content">
+        <header class="topbar">
+          <button class="mobile-menu" id="mobileMenu" aria-label="Open navigation">☰</button>
+          <div class="breadcrumb"><span>Berkeley Builders</span><b>/</b><strong>Overview</strong></div>
+          <div class="topbar-actions">
+            <span class="top-date" id="todayDate"></span>
+            <button class="icon-button notification-button" id="notificationButton" aria-label="Notifications">♧<i></i></button>
+            <button class="top-avatar" id="topProfileButton" aria-label="Sign in or manage account">GB</button>
+          </div>
+        </header>
+
+        <div class="page-content">
+          <section class="welcome-row">
+            <div>
+              <div class="eyebrow"><span class="live-dot"></span>YOUR BUILDER HQ</div>
+              <h1>Make today <span>count.</span></h1>
+              <p class="welcome-copy">A little progress adds up. Here's your corner of the builder universe.</p>
+            </div>
+            <button class="button button-dark" id="newProjectButton"><span>＋</span> Start a project</button>
+          </section>
+
+          <section class="stats-grid" aria-label="Your progress">
+            <article class="stat-card streak-card">
+              <div class="stat-top"><span class="stat-icon icon-lime">✳</span><span class="stat-label">BUILD STREAK</span><span class="stat-arrow">↗</span></div>
+              <div class="stat-value">06 <span>days</span></div>
+              <div class="stat-footer"><span class="streak-dots"><i class="done"></i><i class="done"></i><i class="done"></i><i class="done"></i><i class="done"></i><i class="today"></i><i></i></span><span>Keep it going</span></div>
+            </article>
+            <article class="stat-card xp-card">
+              <div class="stat-top"><span class="stat-icon icon-peach">✳</span><span class="stat-label">SKILL XP</span><span class="stat-arrow">↗</span></div>
+              <div class="stat-value">2,480 <span>xp</span></div>
+              <div class="xp-progress"><span></span></div>
+              <div class="stat-footer"><span>520 XP to Level 09</span><span>82%</span></div>
+            </article>
+            <article class="stat-card projects-card">
+              <div class="stat-top"><span class="stat-icon icon-lilac">▧</span><span class="stat-label">IN THE WORKS</span><span class="stat-arrow">↗</span></div>
+              <div class="stat-value">03 <span>projects</span></div>
+              <div class="stat-footer"><span class="project-avatars"><i>MK</i><i>AS</i><i>+2</i></span><span>Building with 4 people</span></div>
+            </article>
+            <article class="stat-card guild-xp-card">
+              <div class="stat-top"><span class="stat-icon icon-blue">♧</span><span class="stat-label">GUILD RANK</span><span class="stat-arrow">↗</span></div>
+              <div class="stat-value">#04 <span>this week</span></div>
+              <div class="stat-footer"><span class="rank-flair">↑ 2 spots</span><span>Berkeley Builders</span></div>
+            </article>
+          </section>
+
+          <section class="content-grid">
+            <div class="left-column">
+              <article class="section-card skill-card">
+                <div class="section-heading">
+                  <div><div class="eyebrow muted-eyebrow">YOUR GROWTH MAP</div><h2>Skill tree<span class="heading-dot">.</span></h2></div>
+                  <button class="text-button" data-view="Skill tree">View all <span>↗</span></button>
+                </div>
+                <div class="skill-layout">
+                  <div class="tree-visual" aria-label="Skill tree showing JavaScript, React, UI design, and Node.js skills">
+                    <svg class="tree-lines" viewBox="0 0 300 180" aria-hidden="true">
+                      <path d="M150 40 L95 90 M150 40 L205 90 M95 90 L60 145 M95 90 L130 145 M205 90 L175 145 M205 90 L240 145"></path>
+                      <path class="line-muted" d="M150 40 L150 8 M60 145 L28 170 M240 145 L275 170"></path>
+                    </svg>
+                    <button class="skill-node node-core" data-skill="Full-stack foundations"><span>✳</span></button>
+                    <button class="skill-node node-js" data-skill="JavaScript"><span>JS</span></button>
+                    <button class="skill-node node-react" data-skill="React"><span>⚛</span></button>
+                    <button class="skill-node node-ui" data-skill="UI design"><span>◈</span></button>
+                    <button class="skill-node node-node" data-skill="Node.js"><span>N</span></button>
+                    <button class="skill-node node-next" data-skill="Next.js"><span>↗</span></button>
+                    <button class="skill-node node-figma" data-skill="Figma"><span>F</span></button>
+                    <button class="skill-node node-db" data-skill="Databases"><span>⌘</span></button>
+                  </div>
+                  <div class="skill-detail">
+                    <div class="skill-track"><span class="track-dot"></span> YOUR MAIN TRACK</div>
+                    <h3>Full-stack<br>developer</h3>
+                    <p>You're building a solid base. A little more practice in backend could unlock the next branch.</p>
+                    <div class="skill-level"><span>LEVEL 4</span><b>680 / 1,000 XP</b></div>
+                    <div class="skill-progress"><span></span></div>
+                    <button class="text-button small-text-button" data-view="Skill tree">Explore your tree <span>→</span></button>
+                  </div>
+                </div>
+                <div class="skill-legend"><span><i class="legend-active"></i> Growing</span><span><i class="legend-next"></i> Up next</span><span><i class="legend-locked"></i> Locked</span><span class="tree-note">Based on your projects & contributions</span></div>
+              </article>
+
+              <article class="section-card opportunity-card">
+                <div class="section-heading opportunity-heading">
+                  <div><div class="eyebrow muted-eyebrow">PICK UP WHERE YOU LEFT OFF</div><h2>For your next move<span class="heading-dot">.</span></h2></div>
+                  <button class="text-button" data-view="Discover">Explore all <span>↗</span></button>
+                </div>
+                <div class="opportunity-tabs" role="tablist" aria-label="Opportunity types">
+                  <button class="opportunity-tab active" data-filter="all" role="tab" aria-selected="true">For you <span>4</span></button>
+                  <button class="opportunity-tab" data-filter="Open source" role="tab" aria-selected="false">Open source</button>
+                  <button class="opportunity-tab" data-filter="Hackathon" role="tab" aria-selected="false">Hackathons</button>
+                  <button class="opportunity-tab" data-filter="Bounty" role="tab" aria-selected="false">Bounties</button>
+                </div>
+                <div class="opportunity-list" id="opportunityList"></div>
+              </article>
+            </div>
+
+            <div class="right-column">
+              <article class="section-card quest-card">
+                <div class="section-heading compact-heading">
+                  <div><div class="eyebrow muted-eyebrow">SMALL WINS, BIG MOMENTUM</div><h2>Today's quests<span class="heading-dot">.</span></h2></div>
+                  <span class="quest-count" id="questCount">1 / 3</span>
+                </div>
+                <div class="quest-progress"><span id="questProgress"></span></div>
+                <div class="quest-list" id="questList">
+                  <label class="quest-item completed" data-quest-id="show-up"><input type="checkbox" checked><span class="quest-check">✓</span><span class="quest-copy"><strong>Show up today</strong><small>Keep that streak alive</small></span><span class="quest-xp">+20 XP</span></label>
+                  <label class="quest-item" data-quest-id="make-progress"><input type="checkbox"><span class="quest-check"></span><span class="quest-copy"><strong>Make a little progress</strong><small>Push a commit to a project</small></span><span class="quest-xp">+40 XP</span></label>
+                  <label class="quest-item" data-quest-id="help-builder"><input type="checkbox"><span class="quest-check"></span><span class="quest-copy"><strong>Give a builder a hand</strong><small>Leave a peer review</small></span><span class="quest-xp">+30 XP</span></label>
+                </div>
+                <div class="quest-footer"><span>Every bit of progress counts.</span><span>✳</span></div>
+              </article>
+
+              <article class="guild-banner">
+                <div class="guild-banner-top"><span class="guild-symbol">B</span><span class="guild-online-label"><i></i> 12 builders online</span></div>
+                <div class="eyebrow banner-eyebrow">YOUR PEOPLE, YOUR PLACE</div>
+                <h2>Berkeley<br>Builders<span>.</span></h2>
+                <p>Good ideas get better when we build them together.</p>
+                <div class="guild-banner-bottom"><div class="member-stack"><i>MK</i><i>AS</i><i>JL</i><i>+125</i></div><button class="banner-link" data-view="Guild">Visit guild <span>→</span></button></div>
+              </article>
+
+              <article class="section-card activity-card">
+                <div class="section-heading compact-heading">
+                  <div><div class="eyebrow muted-eyebrow">GOOD WORK GETS AROUND</div><h2>Guild activity<span class="heading-dot">.</span></h2></div>
+                  <button class="icon-button activity-more" aria-label="More activity">···</button>
+                </div>
+                <div class="activity-list">
+                  <div class="activity-item"><span class="activity-avatar activity-coral">MK</span><span class="activity-copy"><strong>Maya K.</strong> merged a PR into <b>climate-kit</b><small>12 min ago <i>·</i> <em>+80 XP</em></small></span><span class="activity-emoji">✳</span></div>
+                  <div class="activity-item"><span class="activity-avatar activity-lilac">AS</span><span class="activity-copy"><strong>Arjun S.</strong> started a new project <b>little-library</b><small>38 min ago <i>·</i> <em>New build</em></small></span><span class="activity-emoji">↗</span></div>
+                  <div class="activity-item"><span class="activity-avatar activity-blue">RC</span><span class="activity-copy"><strong>Riley C.</strong> left a review on <b>campus-map</b><small>1 hr ago <i>·</i> <em>+30 XP</em></small></span><span class="activity-emoji">♡</span></div>
+                </div>
+                <button class="activity-all" data-view="Guild">See what everyone's building <span>→</span></button>
+              </article>
+
+              <div class="footer-note"><span>Built for the curious.</span><span>✳ &nbsp; A little better, every day.</span></div>
+            </div>
+          </section>
+          <footer class="mobile-footer">Built for the curious. <span>✳</span></footer>
+        </div>
+      </main>
+    </div>
+    <dialog class="auth-dialog" id="authDialog" aria-labelledby="authTitle">
+      <form class="auth-panel" id="authForm">
+        <button class="dialog-close" id="closeAuthDialog" type="button" aria-label="Close">×</button>
+        <div class="eyebrow muted-eyebrow">YOUR BUILDER HQ</div>
+        <h2 id="authTitle">Welcome to Guild<span class="heading-dot">.</span></h2>
+        <p class="auth-description">Sign in or create an account to sync your profile, quests, and saved opportunities.</p>
+        <p class="auth-config-note" id="authConfigNote" hidden>Firebase isn't configured yet. Add the required VITE_FIREBASE_* environment variables to run the backend.</p>
+        <label class="auth-field" id="displayNameField">Display name<input id="displayNameInput" type="text" autocomplete="name" maxlength="80" placeholder="Your name"></label>
+        <label class="auth-field">Email<input id="emailInput" type="email" autocomplete="email" required></label>
+        <label class="auth-field">Password<input id="passwordInput" type="password" autocomplete="current-password" minlength="6" required></label>
+        <p class="auth-error" id="authError" role="alert"></p>
+        <div class="auth-actions" id="authActions">
+          <button class="button button-dark" id="signInButton" type="submit">Sign in</button>
+          <button class="button button-light" id="createAccountButton" type="button">Create account</button>
+        </div>
+        <button class="button button-light sign-out-button" id="signOutButton" type="button" hidden>Sign out</button>
+      </form>
+    </dialog>
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+    <script type="module" src="/app.js"></script>
+  </body>
+</html>
